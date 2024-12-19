@@ -33,7 +33,7 @@ when:
   departure_time: 2024-12-19 5:30 -0800
   expected_return_time: 2024-12-19 18:00 -0800
 
-# Enter information about the vehicle you're taking to get there.
+# Enter information about the vehicle you're taking.
 vehicle:
   color: "White"
   year: "2020"
