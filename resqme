@@ -1,27 +1,55 @@
 #!/usr/bin/env ruby
 
+require 'time'
 require 'yaml'
 
-emergency_contacts = YAML.load_file("emergency_contacts.yml")
-flag = YAML.load_file("flag.yml")
-countdown_is_active = flag["countdown_is_active"]
+class ResqMe 
+  def initialize
+    begin
+      @emergency_contacts = YAML.load_file("emergency_contacts.yml")
+      @rescue_plan = YAML.load_file("rescue_plan.yml")
+      @flag = YAML.load_file("flag.yml")
+    rescue => error
+      puts "Error loading files: #{error.message}"
+      exit
+    end
+  end
 
-def expected_return_time_has_elapsed?
-  rescue_plan = YAML.load_file("rescue_plan.yml")
-  Time.now.to_s > rescue_plan["when"]["expected_return_time"]
-end
+  def expected_return_time_has_elapsed?
+    Time.now > Time.parse(@rescue_plan["when"]["expected_return_time"])
+  end
 
-loop do
-  if expected_return_time_has_elapsed? && countdown_is_active == true
-    emergency_contacts.each do |name, details|
+  def countdown_is_active?
+    @flag["countdown_is_active"] == true
+  end
+
+  def countdown_is_inactive?
+    @flag["countdown_is_active"] == false
+  end
+
+  def begin_countdown
+    puts "Countdown is now active."
+    loop do
+      if expected_return_time_has_elapsed? && countdown_is_active?
+        notify_emergency_contacts
+        break
+      elsif expected_return_time_has_elapsed? && countdown_is_inactive?
+        break
+      else
+        sleep 20
+      end
+    end
+  end
+
+  private
+
+  def notify_emergency_contacts
+    @emergency_contacts.each do |name, details|
       puts "Name: #{name}"
       puts "Phone: #{details['phone_number']}"
       puts "Email: #{details['email_address']}"
     end
-    break
-  elsif expected_return_time_has_elapsed? && countdown_is_active == false
-    break
-  else
-    sleep 20
   end
 end
+
+ResqMe.new
