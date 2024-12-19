@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 require 'time'
 require 'yaml'
 
@@ -51,5 +49,3 @@ class ResqMe
     end
   end
 end
-
-ResqMe.new
