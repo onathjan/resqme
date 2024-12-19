@@ -3,9 +3,23 @@
 require 'yaml'
 
 emergency_contacts = YAML.load_file("emergency_contacts.yml")
+flag = YAML.load_file("flag.yml")
+countdown_is_active = flag["countdown_is_active"]
 
-emergency_contacts.each do |name, details|
-  puts "Name: #{name}"
-  puts "Phone: #{details['phone_number']}"
-  puts "Email: #{details['email_address']}"
+def expected_return_time_has_elapsed?
+  rescue_plan = YAML.load_file("rescue_plan.yml")
+  Time.now.to_s > rescue_plan["when"]["expected_return_time"]
+end
+
+loop do
+  if countdown_is_active && expected_return_time_has_elapsed?
+    emergency_contacts.each do |name, details|
+      puts "Name: #{name}"
+      puts "Phone: #{details['phone_number']}"
+      puts "Email: #{details['email_address']}"
+    end
+    break
+  else
+    sleep 20
+  end
 end
