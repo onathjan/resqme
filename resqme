@@ -1,2 +1,11 @@
 #!/usr/bin/env ruby
 
+require 'yaml'
+
+emergency_contacts = YAML.load_file("emergency_contacts.yml")
+
+emergency_contacts.each do |name, details|
+  puts "Name: #{name}"
+  puts "Phone: #{details['phone_number']}"
+  puts "Email: #{details['email_address']}"
+end
