@@ -12,12 +12,14 @@ def expected_return_time_has_elapsed?
 end
 
 loop do
-  if countdown_is_active && expected_return_time_has_elapsed?
+  if expected_return_time_has_elapsed? && countdown_is_active == true
     emergency_contacts.each do |name, details|
       puts "Name: #{name}"
       puts "Phone: #{details['phone_number']}"
       puts "Email: #{details['email_address']}"
     end
+    break
+  elsif expected_return_time_has_elapsed? && countdown_is_active == false
     break
   else
     sleep 20
