@@ -31,7 +31,7 @@ where: "We are heading to Redwood National and State Parks to hike the James Irv
 # Experts recommend you add a buffer to your return time. For example, if you plan to come back at noon, give yourself three to six hours to play with and say you’ll return at 3 P.M. or 6 P.M. This allows extra time to have fun, fix the flat tire, or accomplish whatever might happen that can be dealt with alone before activating tons of rescue personnel.
 when:
   departure_time: 2024-12-19 5:30 -0800
-  expected_return_time: 2024-12-19 18:00 -0800
+  expected_return_time: 2024-12-19 13:42 -0800
 
 # Enter information about the vehicle you're taking.
 vehicle:
