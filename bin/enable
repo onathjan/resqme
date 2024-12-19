@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
-require_relative '../resqme'
+require_relative '../resqme.rb'
 require 'yaml'
 
+ResqMe.new.begin_countdown
