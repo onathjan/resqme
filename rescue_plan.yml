@@ -1,0 +1,44 @@
+# Enter information about each member of your party. This information is extremely helpful to SAR personnel, so don't cut corners.
+who:
+  john: 
+    full_name: "John Doe"
+    age: "28"
+    gender: "male"
+    height: "6 foot 2 inches"
+    weight: "195lbs"
+    hair_color: "Brown"
+    eye_color: "Brown"
+    medical_conditions: "none"
+    medications: "none"
+    clothing: "green hiking pants, a black puffer jacket, and a black beanie."
+  jane: 
+    full_name: "Jane Doe"
+    age: "27"
+    gender: "female"
+    height: "5 foot 9 inches"
+    weight: "135lbs"
+    hair_color: "blonde"
+    eye_color: "blue"
+    medical_conditions: "asthma"
+    medications: "Albuterol"
+    clothing: "blue hiking pants, a maroon hoodie, and a grey beanie."
+
+# Describe where you are going in as much detail as possible.
+where: "We are heading to Redwood National and State Parks to hike the James Irvine Trail to Fern Canyon loop. We will be parking at the limited full-day parking lot near the Prairie Creek Visitor Center."
+
+# Enter the date and time that you are departing and when you should return in ISO 8061 format with time zone offset (e.g. 2024-12-19 10:33 -0800).
+# Experts recommend you add a buffer to your return time. For example, if you plan to come back at noon, give yourself three to six hours to play with and say you’ll return at 3 P.M. or 6 P.M. This allows extra time to have fun, fix the flat tire, or accomplish whatever might happen that can be dealt with alone before activating tons of rescue personnel.
+when:
+  departure_time: 2024-12-19 5:30 -0800
+  expected_return_time: 2024-12-19 18:00 -0800
+
+# Enter information about the vehicle you're taking to get there.
+vehicle:
+  color: "White"
+  year: "2020"
+  make: "Honda"
+  model: "Civic"
+  license_plate_number: "1ABC234"
+
+# Give context to your trip by explaining why you're going where you're going.
+why: "To take a day hike, enjoy the nice weather, and photograph local flora and fauna."
