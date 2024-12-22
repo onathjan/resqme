@@ -1,2 +1,3 @@
 #!/usr/bin/env ruby
 
+File.write("config/flag.yaml", "countdown_is_active: false")
