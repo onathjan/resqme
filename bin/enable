@@ -179,6 +179,12 @@ def generate_rescue_plan
   RESCUE_PLAN
 
   File.write("rescue_plan.md", rescue_plan_file_content)
+
+  file_path = File.join(Dir.pwd, 'config', 'expected_return_time.yaml')
+  file_content = 'expected_return_time: "2024-12-22 17:00 -08:00"'
+
+  File.write(file_path, file_content)
+
 end
 
 generate_rescue_plan
@@ -202,6 +208,7 @@ puts "Does this rescue plan look correct? (y/n)"
 rescue_plan_is_correct = gets.chomp.downcase
 
 if rescue_plan_is_correct == 'y'
+  system("clear")
   ResqMe.new.begin_countdown
 elsif rescue_plan_is_correct == 'n'
   generate_rescue_plan
