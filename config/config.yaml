@@ -10,7 +10,7 @@ user:
   medical_conditions: "None"
   medications: "None"
 
-vehicle:
+user_vehicle:
   color: "White"
   year: "2020"
   make: "Honda"
