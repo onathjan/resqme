@@ -21,9 +21,9 @@ user_vehicle:
 time_zone_offset: "-08:00"
 
 emergency_contacts:
-  one:
+  Dad:
     phone_number:  "1234567890"
     email_address: "john@example.com"
-  two:
+  Mom:
     phone_number:  "0987654321"
     email_address: "jane@example.com"
