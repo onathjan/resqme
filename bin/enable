@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
-require_relative '../resqme.rb'
+require_relative '../lib/resqme.rb'
+
+File.write("config/flag.yaml", "countdown_is_active: true")
 
 ResqMe.new.begin_countdown
