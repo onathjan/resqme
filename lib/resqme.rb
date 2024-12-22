@@ -5,7 +5,7 @@ class ResqMe
   def initialize
     begin
       @emergency_contacts = YAML.load_file("config/emergency_contacts.yaml")
-      @rescue_plan = YAML.load_file("config/rescue_plan.yaml")
+      @expected_return_time = YAML.load_file("config/expected_return_time.yaml")
       @flag = YAML.load_file("config/flag.yaml")
     rescue => error
       puts "Error loading files: #{error.message}"
@@ -14,7 +14,7 @@ class ResqMe
   end
 
   def expected_return_time_has_elapsed?
-    Time.now > Time.parse(@rescue_plan["when"]["expected_return_time"])
+    Time.now > Time.parse(@expected_return_time["expected_return_time"])
   end
 
   def countdown_is_active?
