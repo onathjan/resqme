@@ -28,7 +28,7 @@ where: "We are heading to Redwood National and State Parks to hike the James Irv
 
 # Enter the date and time that you are departing and when you expect to return in YYYY-MM-DD HH:MM format with the proper time zone offset for where you live (e.g. 2024-12-19 10:33 -0800).
 # IT IS CRITICALLY IMPORTANT THAT YOU GET THE TIME ZONE OFFSET RIGHT IF YOU WANT TO AVOID SEARCH AND RESCUE BEING CONTACTED WHEN YOU'RE NOT ACTUALLY LOST OR INJURED. 
-# Experts recommend you add a buffer to your return time. For example, if you plan to come back at noon, give yourself three to six hours to play with and say you’ll return at 3 P.M. or 6 P.M. This allows extra time to have fun, fix the flat tire, or accomplish whatever might happen that can be dealt with alone before activating tons of rescue personnel.
+# Experts recommend adding a buffer to your return time. For example, if you plan to come back at noon, give yourself three to six hours to play with and say you’ll return at 3 P.M. or 6 P.M. This allows extra time to have fun, fix the flat tire, or accomplish whatever might happen that can be dealt with alone before activating tons of rescue personnel.
 when:
   departure_time: 2024-12-19 5:30 -0800
   expected_return_time: 2024-12-19 13:42 -0800
