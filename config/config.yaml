@@ -17,5 +17,5 @@ user_vehicle:
   model: "Civic"
   license_plate_number: "1ABC234"
 
-# Run "Time.now.strftime('%:z')" in IRB to get this string.
+# Run "Time.now.strftime('%:z')" in an IRB session to get this string.
 time_zone_offset: "-08:00"
