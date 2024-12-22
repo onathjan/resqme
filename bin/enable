@@ -202,7 +202,7 @@ system("clear")
 
 puts File.read("rescue_plan.md")
 
-puts "-------------------------------"
+puts "-----------------------------------------"
 
 puts "Does this rescue plan look correct? (y/n)"
 rescue_plan_is_correct = gets.chomp.downcase
