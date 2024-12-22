@@ -1,7 +1,210 @@
 #!/usr/bin/env ruby
 
+require 'time'
+require 'yaml'
 require_relative '../lib/resqme.rb'
 
-File.write("config/flag.yaml", "countdown_is_active: true")
+def generate_rescue_plan
 
-ResqMe.new.begin_countdown
+  config_file = YAML.load_file("config/config.yaml")
+
+  puts "What are you wearing?"
+  user_clothing = gets.chomp.capitalize
+
+  party_members = <<~PARTY_MEMBERS
+    ### #{config_file["user"]["full_name"]}
+      Age: #{config_file["user"]["age"]}
+      Gender: #{config_file["user"]["gender"]}
+      Ethnicity: #{config_file["user"]["ethnicity"]}
+      Height: #{config_file["user"]["height"]}
+      Weight: #{config_file["user"]["weight"]}
+      Hair Color: #{config_file["user"]["hair_color"]}
+      Eye Color: #{config_file["user"]["eye_color"]}
+      Medical Conditions: #{config_file["user"]["medical_conditions"]}
+      Medications: #{config_file["user"]["medications"]}
+      Clothing: #{user_clothing}
+  PARTY_MEMBERS
+
+  puts "How many companions are you traveling with? Please enter a number:"
+  number_of_companions = gets.chomp.to_i
+
+  if number_of_companions > 0
+    companion_number = 1
+
+    number_of_companions.times do
+      puts "Enter companion #{companion_number}'s full name:"
+      companion_full_name = gets.chomp
+    
+      puts "Enter companion #{companion_number}'s age:"
+      companion_age = gets.chomp
+    
+      puts "Enter companion #{companion_number}'s gender:"
+      companion_gender = gets.chomp
+
+      puts "Enter companion #{companion_number}'s ethnicity:"
+      companion_ethnicity = gets.chomp
+    
+      puts "Enter companion #{companion_number}'s height:"
+      companion_height = gets.chomp
+    
+      puts "Enter companion #{companion_number}'s weight:"
+      companion_weight = gets.chomp
+    
+      puts "Enter companion #{companion_number}'s hair color:"
+      companion_hair_color = gets.chomp
+    
+      puts "Enter companion #{companion_number}'s eye color:"
+      companion_eye_color = gets.chomp
+    
+      puts "Enter any medical conditions that companion #{companion_number} has. Enter 'none' if they do not have any medical conditions:"
+      companion_medical_conditions = gets.chomp
+    
+      puts "Enter any medications that companion #{companion_number} take. Enter 'none' if they do not take any medications:"
+      companion_medications = gets.chomp
+    
+      puts "What is #{companion_number} wearing?"
+      companion_clothing = gets.chomp
+
+      party_members << <<~COMPANION_INFO
+
+      ### #{companion_full_name}
+        Age: #{companion_age}
+        Gender: #{companion_gender}
+        Ethnicity: #{companion_ethnicity}
+        Height: #{companion_height}
+        Weight: #{companion_weight}
+        Hair Color: #{companion_hair_color}
+        Eye Color: #{companion_eye_color}
+        Medical Conditions: #{companion_medical_conditions}
+        Medications: #{companion_medications}
+        Clothing: #{companion_clothing}
+    COMPANION_INFO
+    
+      companion_number += 1
+    end
+  end
+
+  puts "Where are you going? Be as precise as possible (e.g. We are heading to Redwood National and State Parks to hike the James Irvine Trail to Fern Canyon loop. We will be parking at the limited full-day parking lot near the Prairie Creek Visitor Center)."
+
+  location = gets.chomp
+
+  puts "When are you leaving? Please use YYYY-MM-DD HH:MM format."
+
+  departure_time = gets.chomp
+
+  until departure_time.match?(/\b\d{4}-\d{2}-\d{2} \d{2}:\d{2}\b/) do
+    puts "Invalid time format. Please use YYYY-MM-DD HH:MM"
+    departure_time = gets.chomp
+  end
+
+  until Time.now < Time.parse(departure_time) do
+    puts "Your departure time must be in the future. Please try again."
+    departure_time = gets.chomp
+  end
+
+  puts "What is your expected return time? Please use YYYY-MM-DD HH:MM format." 
+
+  puts "Remember to add a buffer of a few hours so that you have some extra time to have fun, fix a flat tire, or accomplish whatever might happen that can be dealt with alone before activating tons of rescue personnel."
+
+  expected_return_time = gets.chomp
+
+  until expected_return_time.match?(/\b\d{4}-\d{2}-\d{2} \d{2}:\d{2}\b/) do
+    puts "Invalid time format. Please use YYYY-MM-DD HH:MM"
+    expected_return_time = gets.chomp
+  end
+
+  until Time.now < Time.parse(expected_return_time) do
+    puts "Your expected return time must be in the future. Please try again."
+    expected_return_time = gets.chomp
+  end
+
+  puts "Are you taking the vehicle on record in your config file? (y/n)"
+
+  using_vehicle_on_record = gets.chomp.downcase
+
+  if using_vehicle_on_record == 'y'
+    vehicle_color = config_file["user_vehicle"]["color"]
+    vehicle_year = config_file["user_vehicle"]["year"]
+    vehicle_make = config_file["user_vehicle"]["make"]
+    vehicle_model = config_file["user_vehicle"]["model"]
+    vehicle_license_plate_number = config_file["user_vehicle"]["license_plate_number"]
+  else
+    puts "Enter the color of the vehicle you're taking:"
+    vehicle_color = gets.chomp.capitalize
+
+    puts "Enter the year of the vehicle you're taking:"
+    vehicle_year = gets.chomp
+
+    puts "Enter the make of the vehicle you're taking:"
+    vehicle_make = gets.chomp.capitalize
+
+    puts "Enter the model of the vehicle you're taking:"
+    vehicle_model = gets.chomp.capitalize
+
+    puts "Enter the license plate number of the vehicle you're taking:"
+    vehicle_license_plate_number = gets.chomp.upcase
+  end
+
+  puts "Give context to your trip by explaining why you're going where you're going (e.g. To take a day hike, enjoy the nice weather, and photograph local flora and fauna)."
+
+  reason_for_trip = gets.chomp
+
+  rescue_plan_file_content = <<~RESCUE_PLAN 
+    # Copy of #{config_file["user"]["full_name"]}'s Rescue Plan
+
+    ## Party Members
+    
+    #{party_members}
+    ## Destination
+    
+    #{location}
+    
+    ## Departure Time
+    
+    #{departure_time} #{config_file["time_zone_offset"]}
+    
+    ## Expected Return Time
+    
+    #{expected_return_time} #{config_file["time_zone_offset"]}
+    
+    ## Vehicle Being Taken
+
+    A #{vehicle_color} #{vehicle_year} #{vehicle_make} #{vehicle_model} (License Plate #: #{vehicle_license_plate_number}).
+
+    ## Reason for Trip
+    
+    #{reason_for_trip}
+    
+    If you're getting this message it's because #{config_file["user"]["full_name"]} was supposed to be back at #{expected_return_time} but did not disable this alert before that time. This doesn't necessarily mean that they are lost or injured in the field. They may have simply forgotten to disable this alert or may be running a little late. Try to get ahold of them as soon as you can. If you cannot get ahold of them within a reasonable amount of time, please contact your local search and rescue and share this information with them. 
+  RESCUE_PLAN
+
+  File.write("rescue_plan.md", rescue_plan_file_content)
+end
+
+generate_rescue_plan
+
+system("clear")
+
+puts "Enter 'y' when you're ready to review your rescue plan."
+ready = gets.chomp.downcase
+
+until ready == 'y' do
+  puts "Enter 'y' when you're ready to review your rescue plan."
+end
+
+system("clear")
+
+puts File.read("rescue_plan.md")
+
+puts "-------------------------------"
+
+puts "Does this rescue plan look correct? (y/n)"
+rescue_plan_is_correct = gets.chomp.downcase
+
+if rescue_plan_is_correct == 'y'
+  ResqMe.new.begin_countdown
+elsif rescue_plan_is_correct == 'n'
+  generate_rescue_plan
+else
+  puts "You entered something other than y or n. Aborting script."
+end
