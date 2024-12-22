@@ -118,6 +118,8 @@ def generate_rescue_plan
     expected_return_time = gets.chomp
   end
 
+  File.write("config/expected_return_time.yaml", "expected_return_time: #{expected_return_time} #{config_file["timezone_offset"]}")
+
   puts "Are you taking the vehicle on record in your config file? (y/n)"
 
   using_vehicle_on_record = gets.chomp.downcase
