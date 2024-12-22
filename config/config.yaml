@@ -19,3 +19,11 @@ user_vehicle:
 
 # Run "Time.now.strftime('%:z')" in an IRB session to get this string.
 time_zone_offset: "-08:00"
+
+emergency_contacts:
+  one:
+    phone_number:  "1234567890"
+    email_address: "john@example.com"
+  two:
+    phone_number:  "0987654321"
+    email_address: "jane@example.com"
