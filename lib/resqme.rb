@@ -4,9 +4,9 @@ require 'yaml'
 class ResqMe 
   def initialize
     begin
-      @emergency_contacts = YAML.load_file("emergency_contacts.yml")
-      @rescue_plan = YAML.load_file("rescue_plan.yml")
-      @flag = YAML.load_file("flag.yml")
+      @emergency_contacts = YAML.load_file("config/emergency_contacts.yaml")
+      @rescue_plan = YAML.load_file("config/rescue_plan.yaml")
+      @flag = YAML.load_file("config/flag.yaml")
     rescue => error
       puts "Error loading files: #{error.message}"
       exit
