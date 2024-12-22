@@ -1,0 +1,21 @@
+user:
+  full_name: "John Doe"
+  age: "28"
+  gender: "Male"
+  ethnicity: "Caucasian"
+  height: "6 foot 2 inches"
+  weight: "195lbs"
+  hair_color: "Brown"
+  eye_color: "Brown"
+  medical_conditions: "None"
+  medications: "None"
+
+vehicle:
+  color: "White"
+  year: "2020"
+  make: "Honda"
+  model: "Civic"
+  license_plate_number: "1ABC234"
+
+# Run "Time.now.strftime('%:z')" in IRB to get this string.
+time_zone_offset: "-08:00"
