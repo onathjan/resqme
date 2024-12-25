@@ -1,3 +1,4 @@
+require 'pony'
 require 'time'
 require 'yaml'
 
@@ -43,9 +44,21 @@ class ResqMe
 
   def notify_emergency_contacts
     @emergency_contacts.each do |name, details|
-      puts "Name: #{name}"
-      puts "Phone: #{details['phone_number']}"
-      puts "Email: #{details['email_address']}"
+      Pony.mail(
+        to: details["email_address"],
+        from: config_file["user_email_address"],
+        subject: "Rescue plan for #{config_file["user"]["full_name"]}",
+        body: File.read("./rescue_plan.md"),
+        via: :smtp,
+        via_options: {
+          address: config_file["smtp_address"],
+          port: config_file["smtp_port"],
+          user_name: config_file["smtp_server_username"], 
+          password: config_file["smtp_server_username"],
+          authentication: :plain,
+          domain: config_file["email_domain"]
+        }
+      )
     end
   end
 end
