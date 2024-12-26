@@ -51,12 +51,12 @@ class ResqMe
         body: File.read("./rescue_plan.md"),
         via: :smtp,
         via_options: {
-          address: smtp_config['address'],
-          port: smtp_config['port'],
-          user_name: smtp_config['user_name'],
-          password: smtp_config['password'],
-          authentication: smtp_config['authentication'].to_sym,
-          domain: smtp_config['domain']  
+          address: config_file["smtp_config"]['address'],
+          port: config_file["smtp_config"]['port'],
+          user_name: config_file["smtp_config"]['user_name'],
+          password: config_file["smtp_config"]['password'],
+          authentication: config_file["smtp_config"]['authentication'].to_sym,
+          domain: config_file["smtp_config"]['domain']  
         }
       )
     end
