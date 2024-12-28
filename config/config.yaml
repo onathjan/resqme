@@ -20,14 +20,6 @@ user_vehicle:
 # Run "Time.now.strftime('%:z')" in an IRB session to get this string.
 time_zone_offset: "-08:00"
 
-smtp_config:
-  address:
-  port:
-  user_name:
-  password:
-  authentication:
-  domain:
-
 emergency_contacts:
   Dad:
     phone_number:  "1234567890"
