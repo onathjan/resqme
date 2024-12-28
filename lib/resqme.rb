@@ -50,15 +50,14 @@ class ResqMe
         subject: "Rescue plan for #{config_file["user"]["full_name"]}",
         body: File.read("./rescue_plan.md"),
         via: :smtp,
-        via_options: {
-          address: config_file["smtp_config"]['address'],
-          port: config_file["smtp_config"]['port'],
-          user_name: config_file["smtp_config"]['user_name'],
-          password: config_file["smtp_config"]['password'],
-          authentication: config_file["smtp_config"]['authentication'].to_sym,
-          domain: config_file["smtp_config"]['domain']  
-        }
-      )
+        :via_options => {
+          :address        => ENV['RESQME_SMTP_ADDRESS'],
+          :port           => ENV['RESQME_SMTP_PORT'],
+          :user_name      => ENV['RESQME_SMTP_USERNAME'],
+          :password       => ENV['RESQME_SMTP_PASSWORD'],
+          :authentication => :plain,
+          :domain         => ENV['RESQME_SMTP_DOMAIN']
+    })
     end
   end
 end
